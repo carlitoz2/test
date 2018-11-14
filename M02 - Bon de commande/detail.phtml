@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detail commande : <?=$idCommande; ?> </title>
+</head>
+<body>
+<h1> Bon de commande n°<?= $idCommande ?> </h1> 
+
+<section>
+<h2> Informations client </h2>
+    <p> Nom client: <?= $client['customerName'] ?> </p>
+    <p> Informations contact:
+    <ul>
+        <li><?= $client['contactLastName']." ". $client['contactFirstName']?></li>
+        <ul>
+           <li> <?= $client['addressLine1'] ?></li>
+           <li> <?= $client['addressLine2'] ?></li>
+           <li> <?= $client['city'] ?></li>
+           <li> <?= $client['state'] ?></li>
+           <li> <?= $client['postalCode'] ?></li>
+           <li> <?= $client['country'] ?></li>
+        </ul>
+    </ul>
+    </p>
+</section>
+<section>
+    <h2> Détails commande </h2>
+    <table>
+        <thead>
+            <th>Code produit</th>
+            <th>Nom produit</th>
+            <th>Quantité commandée</th>
+            <th>Prix unitaire</th>
+            <th>Sous-total</th>
+        </thead>
+        
+        <?php foreach ($produits as $produit) : ?>
+            <tr>
+                <td><?= $produit['productCode']; ?></td>
+                <td><?= $produit['productName'];?></td> 
+                <td><?= $produit['quantityOrdered'];?></td>
+                <td><?= $produit['priceEach'];?></td>
+                <td><?= round($produit['total'],2);?></td>
+            </tr>
+
+        <?php endforeach?>
+    </table>
+    <table>
+        <tr>
+            <td>Montant HT</td>
+            <td><?= round($totaux[0]['total'],2) ?></td>
+        <tr>
+        <tr>
+            <td>Montant TVA </td>
+            <td><?= $totTVA ?></td>
+        </tr>
+        <tr>
+            <td>Montant total</td>
+            <td><?= $totalTTC?> </td> 
+        </tr>
+
+    </table>
+</section>
+
+
+<!-- <?= var_dump($totaux[0]); ?>
+
+<?php var_dump($_GET); ?>
+    <?php var_dump($produits); ?> -->
+</body>
+</html>
